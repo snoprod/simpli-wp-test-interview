@@ -1,23 +1,27 @@
-export class PostForm {
-  _constructor() {
-    this.bind;
+class PostForm {
+  constructor() {
+    this.bind();
     this.form = document.querySelector("#post-form");
-    this.postTitle = document.querySelector("#post-title");
+    this.postName = document.querySelector("#post-name");
     this.postContent = document.querySelector("#post-content");
     this.postMetadata = document.querySelector("#post-mymeta");
     this.postStatusResponse = document.querySelector("#post-status-response");
     this.postButton = document.querySelector("#post-button");
+    console.log(this.postButton);
+    this.init();
   }
   bind() {
     ["addEvents", "postForm"].forEach((fn) => (this.fn = this[fn].bind(this)));
   }
 
-  postForm() {
+  postForm(e, form) {
     e.preventDefault();
     let xhr = new XMLHttpRequest();
     let data;
 
-    xhr.open("POST", "/wp-json/wp/v2/post-form/submit");
+    console.log(form);
+
+    xhr.open("POST", "/wp-json/wp/v2/post-form", true);
     data = new FormData(form);
     xhr.send(data);
 
@@ -29,15 +33,28 @@ export class PostForm {
       }
     };
     xhr.onloadend = (e) => {
-      postStatusResponse.innerHTML = xhr.responseText;
+      let response
+      try {
+        response = JSON.parse(xhr.responseText);
+      }
+      catch (e) {
+        console.error("Error parsing JSON:", e);
+        return;
+      }
+      if (xhr.status >= 200 && xhr.status < 300) {
+        this.postStatusResponse.innerHTML = "Le post '" + response.post_title + "' à bien été crée avec l'ID : " + response.post_id;
+      }else{
+        this.postStatusResponse.innerHTML = "Une erreur est survenue lors de la création du post : " + response.message;
+      }
     };
   }
 
   addEvents() {
-    this.form.addEventListener("submit", (e) => this.postForm(e, this.form));
+    this.postButton.addEventListener('click', (e) => this.postForm(e, this.form));
   }
 
   init() {
     this.addEvents();
   }
 }
+const $postForm = new PostForm();
