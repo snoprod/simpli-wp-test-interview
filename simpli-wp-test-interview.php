@@ -19,6 +19,8 @@ class SimpliCeremonyStreamingPlugin extends Singleton
     {
         include_once plugin_dir_path( __FILE__ ).'/CeremonyStreaming.php';
         new CeremonyStreamingPlugin();
+        include_once plugin_dir_path( __FILE__ ).'/PostForm.php';
+        new PostFormPlugin();
         register_block_type(plugin_dir_path( __FILE__ ) . '/build/demo');
     }
 
