@@ -43,6 +43,8 @@ class PostForm {
       }
       if (xhr.status >= 200 && xhr.status < 300) {
         this.postStatusResponse.innerHTML = "Le post '" + response.post_title + "' à bien été crée avec l'ID : " + response.post_id;
+        this.form.reset();
+        this.postName.focus();
       }else{
         this.postStatusResponse.innerHTML = "Une erreur est survenue lors de la création du post : " + response.message;
       }
