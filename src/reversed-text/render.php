@@ -2,7 +2,11 @@
 /**
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
+
+$content = isset($attributes['content']) ? $attributes['content'] : '';
+$content = wp_kses_post( $content );
+
 ?>
-<p <?php echo get_block_wrapper_attributes(); ?>>
-	<?php esc_html_e( 'Reversed Text – hello from a dynamic block!', 'reversed-text' ); ?>
+<p <?= get_block_wrapper_attributes(); ?>>
+	<?= $content ?>
 </p>

@@ -1,1 +1,1 @@
-console.log("Hello World! (from reversed-text-block-reversed-text block)");
+(()=>{const e=document.querySelector(".wp-block-reversed-text-block-reversed-text");e&&e.addEventListener("click",(()=>{e.innerHTML=e.innerHTML.split("").reverse().join("")}))})();

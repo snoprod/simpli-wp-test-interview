@@ -7,7 +7,6 @@ class PostForm {
     this.postMetadata = document.querySelector("#post-mymeta");
     this.postStatusResponse = document.querySelector("#post-status-response");
     this.postButton = document.querySelector("#post-button");
-    console.log(this.postButton);
     this.init();
   }
   bind() {
@@ -18,8 +17,6 @@ class PostForm {
     e.preventDefault();
     let xhr = new XMLHttpRequest();
     let data;
-
-    console.log(form);
 
     xhr.open("POST", "/wp-json/wp/v2/post-form", true);
     data = new FormData(form);
@@ -33,30 +30,42 @@ class PostForm {
       }
     };
     xhr.onloadend = (e) => {
-      let response
+      let response;
       try {
         response = JSON.parse(xhr.responseText);
-      }
-      catch (e) {
+      } catch (e) {
         console.error("Error parsing JSON:", e);
         return;
       }
       if (xhr.status >= 200 && xhr.status < 300) {
-        this.postStatusResponse.innerHTML = "Le post '" + response.post_title + "' à bien été crée avec l'ID : " + response.post_id;
+        this.postStatusResponse.innerHTML =
+          "Le post '" +
+          response.post_title +
+          "' à bien été crée avec l'ID : " +
+          response.post_id;
         this.form.reset();
         this.postName.focus();
-      }else{
-        this.postStatusResponse.innerHTML = "Une erreur est survenue lors de la création du post : " + response.message;
+      } else {
+        this.postStatusResponse.innerHTML =
+          "Une erreur est survenue lors de la création du post : " +
+          response.message;
       }
     };
   }
 
   addEvents() {
-    this.postButton.addEventListener('click', (e) => this.postForm(e, this.form));
+    this.postButton.addEventListener("click", (e) =>
+      this.postForm(e, this.form)
+    );
   }
 
   init() {
     this.addEvents();
   }
 }
-const $postForm = new PostForm();
+
+if (document.querySelector("#post-form")) {
+  // If form is present on the page
+  // Initialize the PostForm class
+  const $postForm = new PostForm();
+}

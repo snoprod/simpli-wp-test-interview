@@ -19,7 +19,12 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#view-script
  */
- 
+
 /* eslint-disable no-console */
-console.log("Hello World! (from reversed-text-block-reversed-text block)");
+const block = document.querySelector(".wp-block-reversed-text-block-reversed-text");
+if(block) {
+  block.addEventListener("click", () => {
+    block.innerHTML = block.innerHTML.split("").reverse().join("");
+  })
+};
 /* eslint-enable no-console */

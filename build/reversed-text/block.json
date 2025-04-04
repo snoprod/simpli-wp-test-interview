@@ -9,7 +9,33 @@
   "description": "Example block scaffolded with Create Block tool.",
   "example": {},
   "supports": {
+    "ariaLabel": true,
+    "color": {
+      "background": true,
+      "text": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "style": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "style": true,
+        "width": true
+      }
+    },
     "html": false
+  },
+  "attributes": {
+    "content": {
+      "type": "string",
+      "default": "Hello World",
+      "selector": "p"
+    },
+    "reversed": {
+      "type": "boolean",
+      "default": false
+    }
   },
   "textdomain": "reversed-text",
   "editorScript": "file:./index.js",

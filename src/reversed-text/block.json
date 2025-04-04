@@ -1,20 +1,47 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "reversed-text-block/reversed-text",
-	"version": "0.1.0",
-	"title": "Reversed Text",
-	"category": "text",
-	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
-	"example": {},
-	"supports": {
-		"html": false
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "reversed-text-block/reversed-text",
+  "version": "0.1.0",
+  "title": "Reversed Text",
+  "category": "text",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "example": {},
+  "supports": {
+		"ariaLabel": true,
+    "color": {
+      "background": true,
+      "text": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "style": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "style": true,
+        "width": true
+      }
+    },
+    "html": false
+  },
+	"attributes": {
+		"content": {
+			"type": "string",
+			"default": "Hello World",
+			"selector": "p"
+		},
+		"reversed": {
+			"type": "boolean",
+			"default": false
+		}
 	},
-	"textdomain": "reversed-text",
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
-	"render": "file:./render.php",
-	"viewScript": "file:./view.js"
+
+  "textdomain": "reversed-text",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
 }
